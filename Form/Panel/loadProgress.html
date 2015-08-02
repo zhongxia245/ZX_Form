@@ -1,0 +1,54 @@
+<html>
+
+<head>
+    <title>载入网页进度条</title>
+    <style type="text/css">
+    <meta lang="UTF-8"/>
+    .style1 {
+        font-family: Arial;
+        font-weight: bolder;
+        color: #0066ff;
+        background-color: #fef4d9;
+        padding: 0px;
+        border-style: none;
+    }
+    
+    .style2 {
+        color: #0066ff;
+        text-align: center;
+        border-width: medium;
+        border-style: none;
+    }
+    </style>
+    <script language="javascript">
+    <!--
+    var bar = 0;
+    var line = "||";
+    var amount = "||";
+
+    function count() {
+            bar = bar + 2;
+            amount = amount + line;
+            document.loading.chart.value = amount;
+            document.loading.percent.value = bar + "%";
+            if (bar < 99) {
+                setTimeout("count()", 100);
+            } else {
+                window.location = "https://www.baidu.com";
+            }
+        }
+        //-->
+    </script>
+</head>
+
+<body onLoad="count()">
+    <form name="loading">
+        <center>
+            <font color="#0066ff" size="2">正在载入网页...</font>
+            <input type="text" name="chart" size="46" class="style1">
+            <input type="text" name="percent" size="47" class="style2">
+        </center>
+    </form>
+</body>
+
+</html>
