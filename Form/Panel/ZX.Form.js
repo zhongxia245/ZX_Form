@@ -1,4 +1,11 @@
 (function($) {
+    //引用子控件的基路径 (设置为 引用该插件的HTML,与该插件位置的相对录几个) 
+    $.fn.Form = {};
+    $.fn.Form.basePath = "Panel/";
+    //这里引用了JS, 还有105行有引用JS, 动态引用的
+    document.write('<link rel="stylesheet" href="' + $.fn.Form.basePath + 'plugin/formValidator2.2.4/css/validationEngine.jquery.css">')
+    document.write('<script type="text/javascript" src="' + $.fn.Form.basePath + 'plugin/My97DatePicker/WdatePicker.js"></script>');
+    document.write('<script type="text/javascript" src="' + $.fn.Form.basePath + 'plugin/formValidator2.2.4/jquery.validationEngine.min.js"></script>');
     /*
         author:zhongxia
         time:2015/08/01 
@@ -46,9 +53,6 @@
             var defaultFormConfig = defaultConfig.defaultFormConfig || {};
             formConfig = $.extend({}, defaultFormConfig, formConfig);
 
-            //引用JqueryValidate 类库
-            initControl.loadValidationEngine();
-           // initControl.loadMyDate97();
             // 创建一个 form  里面包含一个 table
             var form = $.fn.Form.createCtl.ctl_from(formConfig);
             var $table = $(defaultConfig.defaulttable);
@@ -101,20 +105,17 @@
             1.2 实例化控件,在标签到页面上之后
         */
         var initControl = {
-            kindeditor: "plugin/Kindeditor/kindeditor-min.js",
-            kindeditorBashPath: "plugin/Kindeditor/",
-
-            WdatePicker: "WdatePicker.js",
-
-            validationEngine: "plugin/formValidator2.2.4/jquery.validationEngine.min.js",
+            //需要的时候才去加载
+            kindeditor: $.fn.Form.basePath + "plugin/Kindeditor/kindeditor-min.js",
+            kindeditorBashPath: $.fn.Form.basePath + "plugin/Kindeditor/",
 
             //传入需要实例化的控件ID数组
             init: function(options) {
                 options = options || [];
-                //如果MyDate97的插件未加载,则加载
-                if (!window.WdatePicker) {
-                    this.loadMyDate97();
-                }
+                // //如果MyDate97的插件未加载,则加载
+                // if (!window.WdatePicker) {
+                //     this.loadMyDate97();
+                // }
                 for (var i = 0; i < options.length; i++) {
                     this.initEditor(options[i].id);
                 }
@@ -133,14 +134,6 @@
                     //添加到富文本框对象集合[获取表单值的时候使用]
                     _editors.push(editor);
                 });
-            },
-            //加载JS 时间控件
-            loadMyDate97: function() {
-                $.getScript(this.WdatePicker);
-            },
-            //加载JS 验证控件
-            loadValidationEngine: function() {
-                $.getScript(this.validationEngine);
             }
         };
 
