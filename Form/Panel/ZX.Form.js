@@ -1,11 +1,10 @@
 (function($) {
-
     /*
         author:zhongxia
         time:2015/08/01 
         version:1.0 --> 尾数偶数表示稳定版本,位数奇数表示测试版本
         表单核心    
-            1. 实例化控件
+            1. 实例化控件(各类型文本框,下拉框,复选框,时间选择,富文本框)
             2. 生成控件
             3. 控件布局
             4. 验证控件
@@ -47,6 +46,9 @@
             var defaultFormConfig = defaultConfig.defaultFormConfig || {};
             formConfig = $.extend({}, defaultFormConfig, formConfig);
 
+            //引用JqueryValidate 类库
+            initControl.loadValidationEngine();
+           // initControl.loadMyDate97();
             // 创建一个 form  里面包含一个 table
             var form = $.fn.Form.createCtl.ctl_from(formConfig);
             var $table = $(defaultConfig.defaulttable);
@@ -101,8 +103,11 @@
         var initControl = {
             kindeditor: "plugin/Kindeditor/kindeditor-min.js",
             kindeditorBashPath: "plugin/Kindeditor/",
-            WdatePicker: "plugin/My97DatePicker/WdatePicker.js",
+
+            WdatePicker: "WdatePicker.js",
+
             validationEngine: "plugin/formValidator2.2.4/jquery.validationEngine.min.js",
+
             //传入需要实例化的控件ID数组
             init: function(options) {
                 options = options || [];
