@@ -1,7 +1,7 @@
 (function($) {
     //引用子控件的基路径 (设置为 引用该插件的HTML,与该插件位置的相对录几个) 
     $.fn.Form = {};
-    $.fn.Form.basePath = "Panel/";
+    $.fn.Form.basePath = "";
     //这里引用了JS, 还有105行有引用JS, 动态引用的
     document.write('<link rel="stylesheet" href="' + $.fn.Form.basePath + 'plugin/formValidator2.2.4/css/validationEngine.jquery.css">')
     document.write('<script type="text/javascript" src="' + $.fn.Form.basePath + 'plugin/My97DatePicker/WdatePicker.js"></script>');
