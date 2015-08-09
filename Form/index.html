@@ -35,7 +35,7 @@
     <!-- <script type="text/javascript" src="plugin/My97DatePicker/WdatePicker.js"></script> -->
     <script type="text/javascript" src="ZX.Form.js"></script>
     <script type="text/javascript">
-    window.onload = function() {
+    $(document).ready(function($) {
         var config = {
             form: {
                 id: "form1",
@@ -112,6 +112,50 @@
                 controlId: 202, //kindeditor
                 id: "10",
                 colspan: 3
+            }, {
+                controlId: 202, //kindeditor
+                id: "11",
+                colspan: 3
+            }, {
+                controlId: 202, //kindeditor
+                id: "12",
+                colspan: 3
+            }, {
+                controlId: 202, //kindeditor
+                id: "13",
+                colspan: 3
+            }, {
+                controlId: 202, //kindeditor
+                id: "14",
+                colspan: 3
+            }, {
+                controlId: 202, //kindeditor
+                id: "15",
+                colspan: 3
+            }, {
+                controlId: 202, //kindeditor
+                id: "16",
+                colspan: 3
+            }, {
+                controlId: 202, //kindeditor
+                id: "17",
+                colspan: 3
+            }, {
+                controlId: 202, //kindeditor
+                id: "18",
+                colspan: 3
+            }, {
+                controlId: 202, //kindeditor
+                id: "19",
+                colspan: 3
+            }, {
+                controlId: 202, //kindeditor
+                id: "20",
+                colspan: 3
+            }, {
+                controlId: 202, //kindeditor
+                id: "21",
+                colspan: 3
             }]
         };
         $('#container').createForm(config);
@@ -121,7 +165,7 @@
             }
         });
         $('#container1').createForm(config2);
-    }
+    });
 
     function check(id) {
         //添加验证信息

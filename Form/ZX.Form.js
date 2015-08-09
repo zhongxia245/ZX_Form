@@ -6,6 +6,7 @@
     document.write('<link rel="stylesheet" href="' + $.fn.Form.basePath + 'plugin/formValidator2.2.4/css/validationEngine.jquery.css">')
     document.write('<script type="text/javascript" src="' + $.fn.Form.basePath + 'plugin/My97DatePicker/WdatePicker.js"></script>');
     document.write('<script type="text/javascript" src="' + $.fn.Form.basePath + 'plugin/formValidator2.2.4/jquery.validationEngine.min.js"></script>');
+    document.write('<script type="text/javascript" src="' + $.fn.Form.basePath + 'plugin/Kindeditor/kindeditor-min.js"></script>');
     /*
         author:zhongxia
         time:2015/08/01 
@@ -96,7 +97,7 @@
             }
 
             //加载第三方插件(需要在生成标签后才可生成的  eg: Kindeditor ,ueditor )
-            initControl.init($.fn.Form.createCtl.initCtls);
+            //initControl.init($.fn.Form.createCtl.initCtls);
 
             return $(form);
         }
@@ -112,28 +113,25 @@
             //传入需要实例化的控件ID数组
             init: function(options) {
                 options = options || [];
-                // //如果MyDate97的插件未加载,则加载
-                // if (!window.WdatePicker) {
-                //     this.loadMyDate97();
-                // }
                 for (var i = 0; i < options.length; i++) {
                     this.initEditor(options[i].id);
                 }
             },
             //加载JS并,实例化富文本编辑器
             initEditor: function(id) {
-                $.getScript(this.kindeditor, function() {
-                    KindEditor.basePath = initControl.kindeditorBashPath;
-                    var editor = KindEditor.create('#' + id, {
-                        items: [
-                            'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
-                            'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-                            'insertunorderedlist', 'lineheight', '|', 'emoticons', 'image', 'multiimage', 'baidumap', 'link', '|', 'fullscreen'
-                        ]
-                    });
-                    //添加到富文本框对象集合[获取表单值的时候使用]
-                    _editors.push(editor);
+                // $.getScript(this.kindeditor, function() {
+                //KindEditor.basePath = initControl.kindeditorBashPath;
+                var editor = KindEditor.create('#' + id, {
+                    items: [
+                        'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                        'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                        'insertunorderedlist', 'lineheight', '|', 'emoticons', 'image', 'multiimage', 'baidumap', 'link', '|', 'fullscreen'
+                    ]
                 });
+                //添加到富文本框对象集合[获取表单值的时候使用]
+                _editors.push(editor);
+                // });
+
             }
         };
 
@@ -209,7 +207,8 @@
         /*=============================对外开放的方法===================================*/
         return {
             create: create,
-            getValue: getValue
+            getValue: getValue,
+            initControl: initControl
         }
     })();
 
@@ -388,6 +387,8 @@
     /*继承到Jquery中,对外部的接口  调用方式: $('#id').createForm(config);*/
     $.fn.createForm = function(config) {
         $(this).html($.fn.Form.create(config));
+        //加载第三方插件(需要在生成标签后才可生成的  eg: Kindeditor )
+        $.fn.Form.initControl.init($.fn.Form.createCtl.initCtls);
     }
 
 })(jQuery);
